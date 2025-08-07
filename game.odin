@@ -6,6 +6,9 @@ import "core:math"
 import RL "vendor:raylib"
 WindowHeight, WindowWidth: i32
 PlayerPos: Vector2
+PlayerSig: SignalType
+value: i8 = 0
+val2: i8 = 0
 main :: proc() {
 	RL.InitWindow(800, 600, "Goober")
 	RL.SetTargetFPS(60)
@@ -20,6 +23,10 @@ main :: proc() {
 		f32(WindowWidth / 2) - f32(player.Scale.x / 2),
 		f32(WindowHeight / 2) - f32(player.Scale.y / 2),
 	}
+	AddListener(&PlayerSig, proc() {
+		val2 = i8(value * 2)
+	})
+
 
 	for !RL.WindowShouldClose() {
 		RL.BeginDrawing()
@@ -35,6 +42,4 @@ ShouldntClose :: proc() {
 		i32(scaleY) * RL.GetScreenHeight(), i32(scaleX) * RL.GetScreenWidth()
 	RL.ClearBackground(RL.DARKPURPLE)
 	RectWidth, RectHeight: i32 = i32(WindowWidth / 10), i32(WindowHeight / 10)
-
-
 }
